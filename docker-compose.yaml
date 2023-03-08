@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    ports: [ 8000:80 ]
+    depends_on:
+      - db
+    volumes:
+      - ./root:/var/www/html:rw
+  db:
+    image: mysql
+    ports: [ 3306:3306 ]
+    command: --default-authentication-plugin=mysql_native_password
+    volumes: 
+      - ./datadir:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysql
+
